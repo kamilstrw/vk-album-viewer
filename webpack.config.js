@@ -18,14 +18,16 @@ module.exports = {
 	entry: './src/js/index.js',
 	output: {
 		path: path.resolve(__dirname),
-		filename: 'assets/js/bundle.js'
+		filename: 'assets/js/bundle.js',
+		publicPath: '/'
 	},
 	watch: true,
 	devServer:
 	{
 		contentBase: path.join(__dirname),
-		port: 3000,
+		port: 80,
 		compress: true,
+		historyApiFallback: true,
 		headers: {
 	        "Access-Control-Allow-Origin": "*",
     		"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
@@ -40,7 +42,8 @@ module.exports = {
 	        	exclude: /node_modules/,
 	        	query: 
 	     		  {
-	       			presets: [ "@babel/preset-env", "@babel/preset-react"]
+	       			presets: [ "@babel/preset-env", "@babel/preset-react"],
+	       			plugins: [["@babel/plugin-proposal-decorators", { "legacy": true }]]
 	     		  }
 	     	},
 			{
