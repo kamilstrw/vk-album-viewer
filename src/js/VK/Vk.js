@@ -19,7 +19,7 @@ export class Vk extends React.Component
 			<vkContext.Provider value = {window.VK}>		
 				<Route exact path="/" render={
 					(props)=>(
-						<Redirect to="/login" push={true}/>
+						<Redirect to="/login"/>
 					)
 				}/>
 				<Route path="/login" component={vkLogin}/>
