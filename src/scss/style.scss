@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:700');
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+#main
+{
+	height: 100vh;
+	width: 100vw;
+}
+
+.page
+{
+	overflow: auto;
+	height: 100%;
+	width: 100%;
+}
+
+.login
+{
+	background-image: url("./Images/Friends.jpg");
+	background-position: center;
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Ubuntu', sans-serif;
+	&__title
+	{
+		color: white;
+		font-size: 40px;
+		display: inline-block;
+		width: 80%;
+	 	text-align: center;
+	}
+}
+

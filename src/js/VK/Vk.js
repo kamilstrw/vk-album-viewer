@@ -1,30 +1,44 @@
 import React from 'react'
 import vkContext from './vkContext'
-import vkLogin from './vkLogin'
+import {vkLoginPage} from './index.js'
 import {connect} from 'react-redux'
 import {Switch, Route, Redirect} from 'react-router-dom'
+
+import * as actionsUsers from "JS/Store/User/actions"
 
 
 let stateToProps = (state) => {
 	return	{
-		user: state.User
+		user: state.User,
+		router: state.router
 	}
 }
-@connect(stateToProps)
+let actionsToProps = {
+	...actionsUsers
+}
+@connect(stateToProps, actionsToProps)
 export class Vk extends React.Component
 {
+	componentDidMount()
+	{
+		window.VK.Auth.getLoginStatus((res)=>{
+			if (res.session)
+			{
+
+			}
+		})
+	}
 	render()
 	{
 		return(
-			<vkContext.Provider value = {window.VK}>		
-				<Route exact path="/" render={
-					(props)=>(
-						<Redirect to="/login"/>
-					)
-				}/>
-				<Route path="/login" component={vkLogin}/>
-				<Route path="/app" render={(props)=>(<React.Fragment>{this.props.children}</React.Fragment>)}/>
-			</vkContext.Provider>
+			<vkContext.Provider value = {window.VK}>
+				{this.props.user && this.props.user.name}
+				<Route exact path="/" render={(props)=> {
+					return 	this.props.user ? <Redirect to="/app"/> : <Redirect to="/login"/>	}	}	/>
+				<Route path="/login" component={vkLoginPage}/>
+				<Route path="/app" render={(props)=> {
+					return <React.Fragment>{this.props.children}</React.Fragment>	}	}	/>
+			</vkContext.Provider> 
 		)
 	}
 }
